@@ -25,19 +25,20 @@ public class UserService implements UserDetailsService {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
         super();
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    public User save(UserRegistrationDto userRegistrationDto){
+    public void save(UserRegistrationDto userRegistrationDto){
         User user = new User(userRegistrationDto.getFirstName(),
                 userRegistrationDto.getLastName(),
                 userRegistrationDto.getEmail(),
                 passwordEncoder.encode(userRegistrationDto.getPassword()),
                 Arrays.asList(new Role("ROLE_USER")));
 
-        return userRepository.save(user);
+        userRepository.save(user);
     }
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

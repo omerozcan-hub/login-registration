@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class MainController {
 
-    @Autowired
-    private UserService userService;
+
+    private final UserService userService;
 
     public MainController(UserService userService){
         super();
@@ -24,12 +24,12 @@ public class MainController {
         return new UserRegistrationDto();
     }
 
-    @GetMapping
+    @GetMapping("/registration")
     public String showRegistrationForm(){
         return "registration";
     }
 
-    @PostMapping
+    @PostMapping("/registration")
     public String registerUserAccount(@ModelAttribute("user") UserRegistrationDto registrationDto){
         userService.save(registrationDto);
         return "redirect:/registration?success";

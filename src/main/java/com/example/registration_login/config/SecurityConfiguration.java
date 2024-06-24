@@ -54,7 +54,7 @@ public class SecurityConfiguration{
                     .logoutSuccessUrl("/login?logout")
                     .permitAll()
             )
-            .authenticationProvider(new DaoAuthenticationProvider());;
+            .authenticationProvider(authenticationProvider());;
 
         return http.build();
     }

@@ -40,6 +40,7 @@ public class UserService implements UserDetailsService {
 
         userRepository.save(user);
     }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
